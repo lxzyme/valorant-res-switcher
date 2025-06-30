@@ -17,7 +17,7 @@ works with any gpu. uses windows api not driver stuff.
 
 ## install
 
-download ValorantResSwitcher.bat and ValorantResSwitcher.ps1 (keep them in the same folder) then run the .bat file.
+download ValorantResSwitcher.bat and ValorantResSwitcher.ps1 (keep them in the same folder) then run the .bat file.. then run the .ps1 90% of the time it doesnt work if you dont run the .bat file 
 
 ## getting true stretch (important)
 
