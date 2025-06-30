@@ -4,7 +4,9 @@ fast res switching for valorant. made this because going through nvidia control 
 
 ## how to use
 
-download the ps1 file and run it. press Q/W/E/R for quick switching or use the menu.
+download both files and run ValorantResSwitcher.bat (just double click it). 
+
+press Q/W/E/R for quick switching or use the menu.
 
 - Q = 1920x1080 
 - W = 1440x1080 (most popular)
@@ -15,12 +17,7 @@ works with any gpu. uses windows api not driver stuff.
 
 ## install
 
-just download ValorantResSwitcher.ps1 and run it. might need to run as admin.
-
-if windows blocks it:
-```
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
+download ValorantResSwitcher.bat and ValorantResSwitcher.ps1 (keep them in the same folder) then run the .bat file.
 
 ## getting true stretch (important)
 
@@ -36,6 +33,12 @@ valorant resets your res every game so you need to do this:
 if you dont do this youll get black bars instead of true stretch. valorant is weird like that.
 
 will add video guide later.
+
+## troubleshooting
+
+**script closes immediately:** use the .bat file instead of the .ps1
+
+**still having issues:** try running as administrator
 
 ## why
 
