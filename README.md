@@ -22,6 +22,21 @@ if windows blocks it:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
+## getting true stretch (important)
+
+valorant resets your res every game so you need to do this:
+
+1. go to device manager and disable all your monitors
+2. launch valorant, go into a game
+3. set display mode to "windowed fullscreen" and scaling to "fill"
+4. use this tool to switch to your stretch res (like 1440x1080)
+5. when round ends and youre in lobby, switch back to 1920x1080
+6. next game make sure youre on "fill" then switch to stretch res again
+
+if you dont do this youll get black bars instead of true stretch. valorant is weird like that.
+
+will add video guide later.
+
 ## why
 
 switching stretched res in valorant sucks when you have to go through control panels. this stays open so you can switch fast between games.
