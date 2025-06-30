@@ -62,23 +62,38 @@ function Set-UniversalResolution {
     }
 }
 
+function Open-DeviceManager {
+    Write-Host ""
+    Write-Host "Opening Device Manager..." -ForegroundColor Yellow
+    try {
+        Start-Process "devmgmt.msc"
+        Write-Host "[SUCCESS] " -NoNewline -ForegroundColor Green
+        Write-Host "Device Manager opened" -ForegroundColor White
+        Start-Sleep -Milliseconds 500
+    }
+    catch {
+        Write-Host "[ERROR] " -NoNewline -ForegroundColor Red
+        Write-Host "Failed to open Device Manager" -ForegroundColor Red
+    }
+}
+
 function Show-Header {
     Clear-Host
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Cyan
-    Write-Host "                VALORANT RESOLUTION SWITCHER v1.0              " -ForegroundColor White
+    Write-Host "                VALORANT RESOLUTION SWITCHER v1.1              " -ForegroundColor White
     Write-Host "                      Created by lxzy                          " -ForegroundColor Magenta
-    Write-Host "                    Portfolio lxzy.dev                         " -ForegroundColor Blue
     Write-Host "================================================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "    NVIDIA AMD Intel Any GPU - Uses Windows Display API        " -ForegroundColor Yellow
+    Write-Host "    NVIDIA AMD Intel Any GPU   Uses Windows Display API        " -ForegroundColor Yellow
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Gray
 }
 
 function Show-QuickMenu {
     Write-Host ""
-    Write-Host "FAST SWITCHING" -ForegroundColor Yellow    Write-Host ""
+    Write-Host "FAST SWITCHING" -ForegroundColor Yellow
+    Write-Host ""
     Write-Host "  [Q] " -NoNewline -ForegroundColor Cyan
     Write-Host "1920x1080 " -NoNewline -ForegroundColor White
     Write-Host "Native 16 to 9" -ForegroundColor Gray
@@ -94,6 +109,10 @@ function Show-QuickMenu {
     Write-Host "  [R] " -NoNewline -ForegroundColor Cyan
     Write-Host "1280x1080 " -NoNewline -ForegroundColor White
     Write-Host "More Stretched" -ForegroundColor Gray
+    
+    Write-Host "  [D] " -NoNewline -ForegroundColor Cyan
+    Write-Host "Device Manager " -NoNewline -ForegroundColor White
+    Write-Host "" -ForegroundColor Gray
     Write-Host ""
 }
 
@@ -104,15 +123,70 @@ function Show-FullMenu {
     Write-Host "  [2] 1440x1080 Stretched          [7] 1280x960 Classic" -ForegroundColor Gray  
     Write-Host "  [3] 1600x1080 Stretched          [8] 1720x1080 Wide" -ForegroundColor Gray
     Write-Host "  [4] 1280x1080 Stretched          [9] Custom Resolution" -ForegroundColor Gray
-    Write-Host "  [5] 1350x1080 Stretched          [0] Exit Program" -ForegroundColor Gray
+    Write-Host "  [5] 1350x1080 Stretched          [H] How to add resolutions" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "  [0] Exit Program" -ForegroundColor Red
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Gray
     Write-Host ""
 }
 
+function Show-ResolutionGuide {
+    Clear-Host
+    Write-Host ""
+    Write-Host "================================================================" -ForegroundColor Cyan
+    Write-Host "                HOW TO ADD MORE RESOLUTIONS                     " -ForegroundColor White
+    Write-Host "================================================================" -ForegroundColor Cyan
+    Write-Host ""
+    
+    Write-Host "NVIDIA USERS:" -ForegroundColor Green
+    Write-Host "1. Right-click desktop -> NVIDIA Control Panel" -ForegroundColor White
+    Write-Host "2. Display -> Change resolution" -ForegroundColor White
+    Write-Host "3. Click 'Customize...' button" -ForegroundColor White
+    Write-Host "4. Click 'Create Custom Resolution'" -ForegroundColor White
+    Write-Host "5. Enter width/height (e.g., 1440x1080)" -ForegroundColor White
+    Write-Host "6. Set refresh rate to match your monitor" -ForegroundColor White
+    Write-Host "7. Click 'Test' then 'OK' if it works" -ForegroundColor White
+    Write-Host ""
+    
+    Write-Host "AMD USERS:" -ForegroundColor Red
+    Write-Host "1. Right-click desktop -> AMD Software" -ForegroundColor White
+    Write-Host "2. Display -> Custom Resolutions" -ForegroundColor White
+    Write-Host "3. Click 'Create New'" -ForegroundColor White
+    Write-Host "4. Enter your desired resolution" -ForegroundColor White
+    Write-Host "5. Test and save if working" -ForegroundColor White
+    Write-Host ""
+    
+    Write-Host "INTEL USERS:" -ForegroundColor Blue
+    Write-Host "1. Right-click desktop -> Intel Graphics Settings" -ForegroundColor White
+    Write-Host "2. Display -> Custom Resolutions" -ForegroundColor White
+    Write-Host "3. Add your custom resolution" -ForegroundColor White
+    Write-Host ""
+    
+    Write-Host "POPULAR VALORANT RESOLUTIONS TO ADD:" -ForegroundColor Yellow
+    Write-Host "- 1440x1080 (Most popular stretched)" -ForegroundColor White
+    Write-Host "- 1600x1080 (Less stretched)" -ForegroundColor White
+    Write-Host "- 1280x1080 (More stretched)" -ForegroundColor White
+    Write-Host "- 1350x1080 (Alternative stretched)" -ForegroundColor White
+    Write-Host ""
+    
+    Write-Host "NOTE: Always test custom resolutions before applying" -ForegroundColor Yellow
+    Write-Host "If your screen goes black, wait 15 seconds for auto-revert." -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "TIP: Use [D] option to open Device Manager" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "================================================================" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "Press any key to return to main menu..." -ForegroundColor Cyan
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+}
+
 function Get-CustomResolution {
     Write-Host "CUSTOM RESOLUTION SETUP" -ForegroundColor Magenta
     Write-Host "================================" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "NOTE: Resolution must be added through GPU control panel first!" -ForegroundColor Yellow
+    Write-Host "Use [H] option to learn how to add new resolutions." -ForegroundColor Yellow
     Write-Host ""
     
     do {
@@ -139,10 +213,7 @@ function Show-Credits {
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Green
     Write-Host "                                                                " -ForegroundColor Green
-    Write-Host "              Thanks for using lxzy's Res Switcher              " -ForegroundColor Green
-    Write-Host "                                                                " -ForegroundColor Green
-    Write-Host "                    Check out more tools at                     " -ForegroundColor White
-    Write-Host "                         lxzy.dev                              " -ForegroundColor Cyan
+    Write-Host "              Thanks for using lxzy Res Switcher                " -ForegroundColor Green
     Write-Host "                                                                " -ForegroundColor Green
     Write-Host "              Good luck in your Valorant games                  " -ForegroundColor Yellow
     Write-Host "                                                                " -ForegroundColor Green
@@ -165,8 +236,6 @@ $ResolutionMap = @{
     '8' = @{Width = 1720; Height = 1080; Name = "Wide"}
 }
 
-
-
 do {
     Show-Header
     Show-QuickMenu
@@ -180,6 +249,15 @@ do {
         Start-Sleep -Seconds 3
         break
     }
+    elseif ($userChoice -eq 'd' -or $userChoice -eq 'device' -or $userChoice -eq 'devmgmt') {
+        Open-DeviceManager
+        Write-Host ""
+        Write-Host "Press any key to return to menu..." -ForegroundColor Cyan
+        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    }
+    elseif ($userChoice -eq 'h' -or $userChoice -eq 'help') {
+        Show-ResolutionGuide
+    }
     elseif ($userChoice -eq '9' -or $userChoice -eq 'custom') {
         $customRes = Get-CustomResolution
         Write-Host ""
@@ -192,21 +270,12 @@ do {
     elseif ($ResolutionMap.ContainsKey($userChoice)) {
         $selectedRes = $ResolutionMap[$userChoice]
         
-        if ($userChoice -in @('q', 'w', 'e', 'r')) {
-            Write-Host "Quick-switching to $($selectedRes.Width)x$($selectedRes.Height)..." -ForegroundColor Yellow
-        } else {
-            Write-Host "Changing to $($selectedRes.Width)x$($selectedRes.Height) $($selectedRes.Name)..." -ForegroundColor Yellow
-        }
-        
+        Write-Host "Changing to $($selectedRes.Width)x$($selectedRes.Height) $($selectedRes.Name)..." -ForegroundColor Yellow
         Set-UniversalResolution -Width $selectedRes.Width -Height $selectedRes.Height
         
-        if ($userChoice -in @('q', 'w', 'e', 'r')) {
-            Start-Sleep -Seconds 1
-        } else {
-            Write-Host ""
-            Write-Host "Press any key to return to menu..." -ForegroundColor Cyan
-            $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-        }
+        Write-Host ""
+        Write-Host "Press any key to return to menu..." -ForegroundColor Cyan
+        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
     }
     else {
         Write-Host ""
